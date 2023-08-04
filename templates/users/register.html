@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block tite %} Register {% endblock %}
+
+
+{% block content %}
+        <div class="container-sm mt-3">
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    <p>
+                    {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endfor %}
+            <div class="row justify-content-left">
+                <div class="col-3">
+                    <p><label class="form-label h6">First Name</label>
+                        {% render_field form.first_name class="form-control" name="first_name" placeholder="First Name" %}
+                    </p>
+                </div>
+                <div class="col-3">
+                    <p><label class="form-label h6">Last Name</label>
+                        {% render_field form.last_name class="form-control" name="last_name" placeholder="Last Name" %}
+                    </p>
+                </div>
+                <div class="col-3">
+                    <p><label class="form-label h6">Email</label>
+                        {% render_field form.email class="form-control" name="email" placeholder="Email" %}
+                    </p>
+                </div>
+            </div>
+            <div class="row justify-content-left">
+                <div class="col-3">
+                    <p><label class="form-label h6">User Name</label>
+                        {% render_field form.username class="form-control" name="username" placeholder="User Name" %}
+                    </p>
+                </div>
+                <div class="col-3">
+                    <p><label class="form-label h6">Password</label>
+                        {% render_field form.password2 class="form-control" name="password2" placeholder="Password" %}
+                    </p>
+                </div>
+                <div class="col-3">
+                    <p><label class="form-label h6">Re-Password</label>
+                        {% render_field form.password1 class="form-control" name="password1" placeholder="Password Confirmation" %}
+                    </p>
+                </div>
+            </div>
+            <div class="row justify-content-left">
+                <div class="col-1">
+                    <p><button  type="submit" class="btn btn-warning">Register</button></p>
+                </div>
+                    <div class="col-1">
+                    <p><a href="{% url 'login' %}" type="submit" class="btn btn-primary">Login</a></p>
+                </div>
+            </form>
+            </div>
+        </div>
+{% endblock %}
